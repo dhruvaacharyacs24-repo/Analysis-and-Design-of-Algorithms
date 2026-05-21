@@ -5,9 +5,9 @@ void merge(int a[],int l,int m,int r)
 {
     int i=l,j=m+1,k=0,b[100000];
 
-    while(i<=m && j<=r)
+    while(i<=m && j<=r){
         b[k++]=(a[i]<a[j])?a[i++]:a[j++];
-
+    }
     while(i<=m)
         b[k++]=a[i++];
 
