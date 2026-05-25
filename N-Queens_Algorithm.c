@@ -1,3 +1,5 @@
+/* 12. N-Queens Problem */
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -19,6 +21,7 @@ int place(int k,int i)
 void queen(int k)
 {
     int i,j;
+    int y=1;
 
     for(i=1;i<=n;i++)
     {
@@ -28,8 +31,10 @@ void queen(int k)
 
             if(k==n)
             {
-                for(j=1;j<=n;j++)
-                    printf("%d ",x[j]);
+                for(j=1;j<=n;j++){
+                    printf("Row-%d \t Column-%d\n",y,x[j]);
+                    y++;
+                } 
 
                 printf("\n");
             }
