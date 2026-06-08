@@ -1,51 +1,33 @@
 #include<stdio.h>
-
+#define INF 99999
 int main()
 {
-    int n,i,j,min,u,v;
-    int edges=0,cost=0;
-
+    int n,i,j,u,v,min,cost=0;
     printf("Enter number of vertices: ");
     scanf("%d",&n);
-
-    int a[20][20],vis[20]={0};
-
-    printf("Enter cost matrix:\n");
-
+    int g[n][n],vis[n],key[n],par[n];
+    printf("Enter adjacency matrix:\n");
     for(i=0;i<n;i++)
         for(j=0;j<n;j++)
-            scanf("%d",&a[i][j]);
-
-    vis[0]=1;
-
-    printf("Edges in MST:\n");
-
-    while(edges<n-1)
-    {
-        min=999;
-
-        for(i=0;i<n;i++)
-        {
-            if(vis[i])
-            {
-                for(j=0;j<n;j++)
-                {
-                    if(!vis[j] && a[i][j]<min)
-                    {
-                        min=a[i][j];
-                        u=i;
-                        v=j;
-                    }
-                }
-            }
-        }
-
-        printf("%d -> %d = %d\n",u,v,min);
-
-        vis[v]=1;
-        cost+=min;
-        edges++;
+            scanf("%d",&g[i][j]);
+    for(i=0;i<n;i++){
+        vis[i]=0; key[i]=INF; par[i]=-1;
     }
-
-    printf("Minimum Cost = %d",cost);
+    key[0]=0;
+    for(i=0;i<n-1;i++){
+        min=INF; u=-1;
+        for(j=0;j<n;j++)
+            if(!vis[j] && key[j]<min){ min=key[j]; u=j; }
+        vis[u]=1;
+        for(v=0;v<n;v++)
+            if(g[u][v] && !vis[v] && g[u][v]<key[v]){
+                key[v]=g[u][v]; par[v]=u;
+            }
+    }
+    printf("MST Edges:\n");
+    for(i=1;i<n;i++){
+        printf("%d - %d : %d\n",par[i],i,g[par[i]][i]);
+        cost+=g[par[i]][i];
+    }
+    printf("Total Cost = %d\n",cost);
 }
