@@ -23,8 +23,15 @@ int main()
     printf("Enter cost matrix:\n");
 
     for(i=0;i<n;i++)
+    {
         for(j=0;j<n;j++)
+        {
             scanf("%d",&g[i][j]);
+
+            if(i==j || g[i][j]==0)
+                g[i][j]=999;
+        }
+    }
 
     printf("Edges in MST:\n");
 
@@ -62,4 +69,6 @@ int main()
     }
 
     printf("Minimum Cost = %d",cost);
+
+    return 0;
 }
